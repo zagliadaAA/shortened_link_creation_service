@@ -21,3 +21,13 @@ func NewStatusInternalServerError(message string) *StatusInternalServerError {
 		Message: message,
 	}
 }
+
+type StatusBadRequestError struct {
+	Message string `json:"message"`
+}
+
+func NewStatusBadRequestError(message string) *StatusBadRequestError {
+	return &StatusBadRequestError{
+		Message: message,
+	}
+}

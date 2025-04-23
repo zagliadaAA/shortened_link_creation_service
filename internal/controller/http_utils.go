@@ -24,6 +24,10 @@ func RespondValidationError(w http.ResponseWriter, v *ValidationError) {
 	RespondJSON(w, http.StatusBadRequest, v)
 }
 
+func RespondStatusBadRequestError(w http.ResponseWriter, s *StatusBadRequestError) {
+	RespondJSON(w, http.StatusBadRequest, s)
+}
+
 // DecodeRequest считывает тело запроса и помещает его в структуру
 func DecodeRequest(w http.ResponseWriter, r *http.Request, req interface{}) error {
 	err := json.NewDecoder(r.Body).Decode(req)

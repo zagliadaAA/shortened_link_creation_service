@@ -6,4 +6,6 @@ import (
 
 type Repository interface {
 	Create(link *domain.Link) (*domain.Link, error)
+	FindByURL(url string) (*domain.Link, error)
+	FindByShortURL(shortURL string) (*domain.Link, error)
 }

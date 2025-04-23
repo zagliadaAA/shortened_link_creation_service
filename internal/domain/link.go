@@ -12,3 +12,7 @@ func NewLink(URL string, ShortURL string) *Link {
 		ShortURL: ShortURL,
 	}
 }
+
+func (l *Link) SetID(id int) {
+	l.ID = id
+}

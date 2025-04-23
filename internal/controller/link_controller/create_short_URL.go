@@ -11,11 +11,6 @@ type createLinkReq struct {
 }
 
 func (c *Controller) CreateShortURL(w http.ResponseWriter, r *http.Request) {
-	// парсим json в нашу структуру
-	// валидируем тело запроса или парамерты
-	// вызываем юзкейс
-	// обрабатываем ошибки если есть
-	// возвращаем результат
 	var req createLinkReq
 	if err := controller.DecodeRequest(w, r, &req); err != nil {
 		controller.RespondInternalServerError(w, controller.NewStatusInternalServerError("не удалось считать тело запроса"))
@@ -26,7 +21,8 @@ func (c *Controller) CreateShortURL(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		link, err = c.linkUseCase.CreateShortURL(req.URL)
 		if err != nil {
-
+			controller.RespondInternalServerError(w, controller.NewStatusInternalServerError("не удалось создать короткий URL"))
+			return
 		}
 	}
 

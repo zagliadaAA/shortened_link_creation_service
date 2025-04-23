@@ -10,17 +10,19 @@ import (
 
 const allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
 const shortURLLength = 10
+const myDomain = "https://myDomain.ru/"
 
-func (uc *UseCase) CreateShortURL(URL string) (*domain.Link, error) {
-	// идем в бд и проверяем, существует для длинной короткая или нет
-	// если существует, то возвращаем короткую
-	// если не существует, то идем в бд, создаем и возвращаем короткую
-
-	shortURL := shortedURL(URL)
-
+func (uc *UseCase) CreateShortURL(url string) (*domain.Link, error) {
+	shortURL := shortedURL(url)
 	fmt.Println("Короткий URL: ", shortURL)
+	link := domain.NewLink(url, shortURL)
 
-	return nil, nil
+	linkCreate, err := uc.repo.Create(link)
+	if err != nil {
+		return nil, fmt.Errorf("uc.repo.Create: %w", err)
+	}
+
+	return linkCreate, nil
 }
 
 func shortedURL(url string) string {
@@ -37,5 +39,5 @@ func shortedURL(url string) string {
 		result += string(allowedCharacters[index])
 	}
 
-	return result
+	return myDomain + result
 }

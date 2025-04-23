@@ -5,6 +5,10 @@ import (
 )
 
 func (mr *InMemoryRepo) Create(link *domain.Link) (*domain.Link, error) {
+	id := mr.getNextIdentifier()
+	link.SetID(id)
+
+	mr.linkMap[link.ID] = link
 
 	return link, nil
 }
