@@ -9,9 +9,9 @@ type Controller struct {
 }
 
 type linkUseCase interface {
-	FindByURL(url string) (*domain.Link, error)
+	GetLinkByURL(url string) (*domain.Link, error)
 	CreateShortURL(URL string) (*domain.Link, error)
-	FindByShortURL(shortURL string) (*domain.Link, error)
+	GetLinkByShortURL(shortURL string) (*domain.Link, error)
 }
 
 func NewController(useCase linkUseCase) *Controller {

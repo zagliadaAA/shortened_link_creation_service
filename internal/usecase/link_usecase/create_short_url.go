@@ -13,8 +13,8 @@ const shortURLLength = 10
 const myDomain = "https://myDomain.ru/"
 
 func (uc *UseCase) CreateShortURL(url string) (*domain.Link, error) {
-	shortURL := shortedURL(url)
-	fmt.Println("Короткий URL: ", shortURL)
+	shortURL := shortedURLAlgorithm(url)
+
 	link := domain.NewLink(url, shortURL)
 
 	linkCreate, err := uc.repo.Create(link)
@@ -25,7 +25,7 @@ func (uc *UseCase) CreateShortURL(url string) (*domain.Link, error) {
 	return linkCreate, nil
 }
 
-func shortedURL(url string) string {
+func shortedURLAlgorithm(url string) string {
 	hash := sha256.Sum256([]byte(url))
 
 	var result string

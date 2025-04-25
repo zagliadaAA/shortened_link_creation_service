@@ -17,7 +17,7 @@ func (c *Controller) ReturnURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	link, err := c.linkUseCase.FindByShortURL(req.ShortURL)
+	link, err := c.linkUseCase.GetLinkByShortURL(req.ShortURL)
 	if err != nil {
 		controller.RespondStatusBadRequestError(w, controller.NewStatusBadRequestError("не удалось найти оригинальный URL"))
 		return

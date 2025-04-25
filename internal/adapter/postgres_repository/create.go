@@ -12,7 +12,7 @@ func (pr *PostgresRepo) Create(link *domain.Link) (*domain.Link, error) {
 
 	err := pr.cluster.Conn.QueryRow(context.Background(), query, link.URL, link.ShortURL).Scan(&link.ID)
 	if err != nil {
-		return nil, fmt.Errorf("createLink: ошибка при обращении к БД: %w", err)
+		return nil, fmt.Errorf("create: ошибка при обращении к БД: %w", err)
 	}
 
 	return link, nil

@@ -17,7 +17,7 @@ func (c *Controller) CreateShortURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	link, err := c.linkUseCase.FindByURL(req.URL)
+	link, err := c.linkUseCase.GetLinkByURL(req.URL)
 	if err != nil {
 		link, err = c.linkUseCase.CreateShortURL(req.URL)
 		if err != nil {

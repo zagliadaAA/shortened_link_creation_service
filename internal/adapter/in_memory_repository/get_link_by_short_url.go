@@ -6,12 +6,12 @@ import (
 	"shortened_link_creation_service/internal/domain"
 )
 
-func (mr *InMemoryRepo) FindByShortURL(shortURL string) (*domain.Link, error) {
+func (mr *InMemoryRepo) GetLinkByShortURL(shortURL string) (*domain.Link, error) {
 	for _, link := range mr.linkMap {
 		if link.ShortURL == shortURL {
 			return link, nil
 		}
 	}
 
-	return nil, fmt.Errorf("короткий URL не найден")
+	return nil, fmt.Errorf("getLinkByShortURL: короткий URL не найден")
 }

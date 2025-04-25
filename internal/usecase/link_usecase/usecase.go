@@ -9,9 +9,9 @@ type UseCase struct {
 }
 
 type repo interface {
-	FindByURL(url string) (*domain.Link, error)
+	GetLinkByURL(url string) (*domain.Link, error)
 	Create(link *domain.Link) (*domain.Link, error)
-	FindByShortURL(shortURL string) (*domain.Link, error)
+	GetLinkByShortURL(shortURL string) (*domain.Link, error)
 }
 
 func NewUseCase(repo repo) *UseCase {

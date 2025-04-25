@@ -10,7 +10,7 @@ func RespondJSON(w http.ResponseWriter, status int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
 	if payload != nil {
-		json.NewEncoder(w).Encode(payload)
+		_ = json.NewEncoder(w).Encode(payload)
 	}
 }
 
@@ -24,6 +24,7 @@ func RespondValidationError(w http.ResponseWriter, v *ValidationError) {
 	RespondJSON(w, http.StatusBadRequest, v)
 }
 
+// RespondStatusBadRequestError отправляет JSON-ответ с ошибкой запроса.
 func RespondStatusBadRequestError(w http.ResponseWriter, s *StatusBadRequestError) {
 	RespondJSON(w, http.StatusBadRequest, s)
 }
