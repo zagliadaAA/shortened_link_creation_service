@@ -15,7 +15,6 @@ type ServiceProvider struct {
 	repo     adapter.Repository
 	repoType string
 
-	//linkController *link_controller.Controller
 	linkController *grpc.Controller
 }
 

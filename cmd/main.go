@@ -15,16 +15,8 @@ func main() {
 
 	sp := service_provider.NewServiceProvider(repoType)
 
-	// запуск сервера
-	/*
-		err := http.ListenAndServe(":8080", sp.GetRoutes())
-		if err != nil {
-			panic(err)
-		}
-	*/
-
 	// Запуск gRPC сервера
-	lis, err := net.Listen("tcp", ":9122")
+	lis, err := net.Listen("tcp", ":9090")
 	if err != nil {
 		panic(fmt.Sprintf("не удалось начать прослушивание: %v", err))
 	}

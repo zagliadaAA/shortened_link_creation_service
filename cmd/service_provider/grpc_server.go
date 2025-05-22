@@ -7,18 +7,6 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-/*
-func (sp *ServiceProvider) GetRoutes() *http.ServeMux {
-	// роутер ручек
-	mux := http.NewServeMux()
-	// link
-	mux.HandleFunc("POST /createShortURL", sp.GetLinkController().CreateShortURL)
-	mux.HandleFunc("GET /returnURL", sp.GetLinkController().ReturnURL)
-
-	return mux
-}
-*/
-
 func (sp *ServiceProvider) GetGRPCServer() *grpc.Server {
 	grpcServer := grpc.NewServer()
 
