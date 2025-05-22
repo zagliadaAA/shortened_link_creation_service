@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"net/http"
+	"net"
 	"os"
 	"strings"
 
@@ -16,17 +16,24 @@ func main() {
 	sp := service_provider.NewServiceProvider(repoType)
 
 	// запуск сервера
-	err := http.ListenAndServe(":8080", sp.GetRoutes())
+	/*
+		err := http.ListenAndServe(":8080", sp.GetRoutes())
+		if err != nil {
+			panic(err)
+		}
+	*/
+
+	// Запуск gRPC сервера
+	lis, err := net.Listen("tcp", ":9122")
 	if err != nil {
-		panic(err)
+		panic(fmt.Sprintf("не удалось начать прослушивание: %v", err))
+	}
+
+	fmt.Println("Запуск gRPC сервера на порту :9090")
+	if err := sp.GetGRPCServer().Serve(lis); err != nil {
+		panic(fmt.Sprintf("не удалось запустить сервер: %v", err))
 	}
 }
-
-/*
-хеширование - это алгоритм преобразования исходных данных в последовательность заранее известной длины.
-метод позволяет сократить любую последовательность до фиксированного количества байт.
-sha-256 это одитн из алгоритмов безопасного хеширования
-*/
 
 func dbSelection() string {
 	// Запрос выбора репозитория у пользователя
